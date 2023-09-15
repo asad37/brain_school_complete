@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     //it requires 3 parameters
     //context, orientation, device
     //it always requires, see plugin documentation
-    return Sizer(builder: (context, orientation, device){
+    return Sizer(builder: (context, orientation, device) {
       return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'School Brain',
