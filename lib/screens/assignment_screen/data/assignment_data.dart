@@ -10,8 +10,8 @@ class AssignmentData {
 }
 
 List<AssignmentData> assignment = [
-  AssignmentData('Assembly Language', 'Red Blood Cells', '17 Nov 2021',
-      '20 Nov 2021', 'Pending'),
+  AssignmentData('Assembly Language', 'Assignment 2', '17 Nov 2023', '15  2023',
+      'Pending'),
   AssignmentData('Distribution Computing', 'bohr theory', '11 Nov 2021',
       '20 Nov 2021', 'Submitted'),
   AssignmentData('Chemistry', 'Organic Chemistry', '21 Oct 2021', '27 Oct 2021',
