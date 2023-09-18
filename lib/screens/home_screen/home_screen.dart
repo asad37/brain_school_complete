@@ -1,3 +1,4 @@
+import 'package:brain_school/ask_question.dart';
 import 'package:brain_school/constants.dart';
 import 'package:brain_school/screens/assignment_screen/assignment_screen.dart';
 import 'package:brain_school/screens/datesheet_screen/datesheet_screen.dart';
@@ -33,18 +34,18 @@ class HomeScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         StudentName(
-                          studentName: 'Aisha',
+                          studentName: 'Asad Waqas',
                         ),
                         kHalfSizedBox,
                         StudentClass(
-                            studentClass: 'Class X-II A | Roll no: 12'),
+                            studentClass: 'Class BSCS-5M | Roll no: 27'),
                         kHalfSizedBox,
-                        StudentYear(studentYear: '2020-2021'),
+                        StudentYear(studentYear: '2021-2025'),
                       ],
                     ),
                     kHalfSizedBox,
                     StudentPicture(
-                        picAddress: 'assets/images/student_profile.jpeg',
+                        picAddress: 'assets/images/asad1.png',
                         onPress: () {
                           // go to profile detail screen here
                           Navigator.pushNamed(
@@ -61,7 +62,7 @@ class HomeScreen extends StatelessWidget {
                         //go to attendance screen
                       },
                       title: 'Attendance',
-                      value: '90.02%',
+                      value: '81.09%',
                     ),
                     StudentDataCard(
                       onPress: () {
@@ -69,7 +70,7 @@ class HomeScreen extends StatelessWidget {
                         Navigator.pushNamed(context, FeeScreen.routeName);
                       },
                       title: 'Fees Due',
-                      value: '600\$',
+                      value: '19,500 PKR',
                     ),
                   ],
                 )
@@ -146,7 +147,12 @@ class HomeScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         HomeCard(
-                          onPress: () {},
+                          onPress: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => AskQuestion()));
+                          },
                           icon: 'assets/icons/ask.svg',
                           title: 'Ask',
                         ),

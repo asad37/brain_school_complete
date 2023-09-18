@@ -37,16 +37,14 @@ final kTopBorderRadius = BorderRadius.only(
 );
 
 final kBottomBorderRadius = BorderRadius.only(
-  bottomRight: Radius.circular(SizerUtil.deviceType == DeviceType.tablet ? 40 : 20),
+  bottomRight:
+      Radius.circular(SizerUtil.deviceType == DeviceType.tablet ? 40 : 20),
   bottomLeft:
-  Radius.circular(SizerUtil.deviceType == DeviceType.tablet ? 40 : 20),
+      Radius.circular(SizerUtil.deviceType == DeviceType.tablet ? 40 : 20),
 );
 
 final kInputTextStyle = GoogleFonts.poppins(
-  color: kTextBlackColor,
-  fontSize: 11.sp,
-  fontWeight: FontWeight.w500
-);
+    color: kTextBlackColor, fontSize: 11.sp, fontWeight: FontWeight.w500);
 
 //validation for mobile
 const String mobilePattern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
@@ -54,3 +52,4 @@ const String mobilePattern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
 //validation for email
 const String emailPattern =
     r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+const usernamePatteren = r'("^[A-Za-z]\\w{5, 29}$")';

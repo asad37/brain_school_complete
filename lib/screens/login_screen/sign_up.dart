@@ -1,20 +1,26 @@
 import 'package:brain_school/components/custom_buttons.dart';
 import 'package:brain_school/constants.dart';
 import 'package:brain_school/screens/home_screen/home_screen.dart';
-import 'package:brain_school/screens/login_screen/sign_up.dart';
+import 'package:brain_school/screens/login_screen/login_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 late bool _passwordVisible;
 
-class LoginScreen extends StatefulWidget {
-  static String routeName = 'LoginScreen';
+class SignUp extends StatefulWidget {
+  static String routeName = 'SignUp';
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _SignUpState createState() => _SignUpState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignUpState extends State<SignUp> {
+  TextEditingController userController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
   //validate our form now
   final _formKey = GlobalKey<FormState>();
 
@@ -46,7 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       Text('Hi Student',
                           style: Theme.of(context).textTheme.subtitle1),
-                      Text('Sign in to continue',
+                      Text('SignUp to continue',
                           style: Theme.of(context).textTheme.subtitle2),
                       sizedBox,
                     ],
@@ -75,6 +81,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
+                        buildUsernameField(),
+                        sizedBox,
+                        buildContactField(),
                         sizedBox,
                         buildEmailField(),
                         sizedBox,
@@ -82,48 +91,27 @@ class _LoginScreenState extends State<LoginScreen> {
                         sizedBox,
                         DefaultButton(
                           onPress: () {
-                            if (_formKey.currentState!.validate()) {
-                              Navigator.pushNamedAndRemoveUntil(context,
-                                  HomeScreen.routeName, (route) => false);
+                            var username = userController.text.trim();
+                            var phone = userController.text.trim();
+                            var email = userController.text.trim();
+                            var password = userController.text.trim();
+                            try {
+                              FirebaseAuth.instance
+                                  .createUserWithEmailAndPassword(
+                                      email: email, password: password)
+                                  .then((value) {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => LoginScreen()));
+                                Text("User Created");
+                              });
+                            } on FirebaseAuthException catch (e) {
+                              print("${e.message}");
                             }
                           },
-                          title: 'SIGN IN',
+                          title: 'SIGN Up',
                           iconData: Icons.arrow_forward_outlined,
-                        ),
-                        sizedBox,
-                        Align(
-                          alignment: Alignment.bottomRight,
-                          child: Text(
-                            'Forgot Password',
-                            textAlign: TextAlign.end,
-                            style: Theme.of(context)
-                                .textTheme
-                                .subtitle2!
-                                .copyWith(
-                                    color: kPrimaryColor,
-                                    fontWeight: FontWeight.w700),
-                          ),
-                        ),
-                        Align(
-                          alignment: Alignment.bottomRight,
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SignUp()));
-                            },
-                            child: Text(
-                              'SignUp to',
-                              textAlign: TextAlign.end,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .subtitle2!
-                                  .copyWith(
-                                      color: kPrimaryColor,
-                                      fontWeight: FontWeight.w700),
-                            ),
-                          ),
                         ),
                       ],
                     ),
@@ -139,11 +127,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
   TextFormField buildEmailField() {
     return TextFormField(
+      controller: emailController,
       textAlign: TextAlign.start,
       keyboardType: TextInputType.emailAddress,
       style: kInputTextStyle,
       decoration: InputDecoration(
-        labelText: 'Mobile Number/Email',
+        labelText: 'Email',
         floatingLabelBehavior: FloatingLabelBehavior.always,
       ),
       validator: (value) {
@@ -160,8 +149,57 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  TextFormField buildUsernameField() {
+    return TextFormField(
+      controller: userController,
+      textAlign: TextAlign.start,
+      keyboardType: TextInputType.text,
+      style: kInputTextStyle,
+      decoration: InputDecoration(
+        labelText: 'Username',
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+      ),
+      validator: (value) {
+        //for validation
+        RegExp regExp = new RegExp(usernamePatteren);
+        if (value == null || value.isEmpty) {
+          return 'Please enter some text';
+          //if it does not matches the pattern, like
+          //it not contains @
+        } else if (!regExp.hasMatch(value)) {
+          return 'Please enter a valid username';
+        }
+      },
+    );
+  }
+
+  TextFormField buildContactField() {
+    return TextFormField(
+      controller: phoneController,
+      textAlign: TextAlign.start,
+      keyboardType: TextInputType.phone,
+      style: kInputTextStyle,
+      decoration: InputDecoration(
+        labelText: 'Phone Number',
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+      ),
+      validator: (value) {
+        //for validation
+        RegExp regExp = new RegExp(mobilePattern);
+        if (value == null || value.isEmpty) {
+          return 'Please enter Phone Number';
+          //if it does not matches the pattern, like
+          //it not contains @
+        } else if (!regExp.hasMatch(value)) {
+          return 'Please enter a valid Phone Number';
+        }
+      },
+    );
+  }
+
   TextFormField buildPasswordField() {
     return TextFormField(
+      controller: passwordController,
       obscureText: _passwordVisible,
       textAlign: TextAlign.start,
       keyboardType: TextInputType.visiblePassword,
@@ -185,7 +223,7 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
       validator: (value) {
         if (value!.length < 5) {
-          return 'Must be more than 5 characters';
+          return 'Must be more than 6 characters';
         }
       },
     );

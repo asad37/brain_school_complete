@@ -1,11 +1,16 @@
+import 'package:brain_school/firebase_options.dart';
 import 'package:brain_school/routes.dart';
 import 'package:brain_school/screens/splash_screen/splash_screen.dart';
 import 'package:brain_school/theme.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(MyApp());
 }
 
@@ -19,7 +24,7 @@ class MyApp extends StatelessWidget {
     return Sizer(builder: (context, orientation, device) {
       return MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'School Brain',
+        title: 'Bechelor in Computer Science',
         theme: CustomTheme().baseTheme,
         //initial route is splash screen
         //mean first screen

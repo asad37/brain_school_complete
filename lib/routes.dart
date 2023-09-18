@@ -1,3 +1,4 @@
+import 'package:brain_school/ask_question.dart';
 import 'package:brain_school/screens/login_screen/login_screen.dart';
 import 'package:brain_school/screens/splash_screen/splash_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,6 +13,7 @@ Map<String, WidgetBuilder> routes = {
   SplashScreen.routeName: (context) => SplashScreen(),
   LoginScreen.routeName: (context) => LoginScreen(),
   HomeScreen.routeName: (context) => HomeScreen(),
+  AskQuestion.routeName: (context) => AskQuestion(),
   MyProfileScreen.routeName: (context) => MyProfileScreen(),
   FeeScreen.routeName: (context) => FeeScreen(),
   AssignmentScreen.routeName: (context) => AssignmentScreen(),

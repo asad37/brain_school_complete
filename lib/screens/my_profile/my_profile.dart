@@ -51,8 +51,7 @@ class MyProfileScreen extends StatelessWidget {
                     radius:
                         SizerUtil.deviceType == DeviceType.tablet ? 12.w : 13.w,
                     backgroundColor: kSecondaryColor,
-                    backgroundImage:
-                        AssetImage('assets/images/student_profile.jpeg'),
+                    backgroundImage: AssetImage('assets/images/asad1.png'),
                   ),
                   kWidthSizedBox,
                   Column(
@@ -60,10 +59,10 @@ class MyProfileScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Aisha Mirza',
+                        'Asad Waqas',
                         style: Theme.of(context).textTheme.subtitle1,
                       ),
-                      Text('Class X-II A | Roll no: 12',
+                      Text('Class BSCS-5M | Roll no: 27',
                           style: Theme.of(context).textTheme.subtitle2),
                     ],
                   )
@@ -75,41 +74,42 @@ class MyProfileScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 ProfileDetailRow(
-                    title: 'Registration Number', value: '2020-ASDF-2021'),
-                ProfileDetailRow(title: 'Academic Year', value: '2020-2021'),
+                    title: 'Registration Number', value: '2021-ASDF-2025'),
+                ProfileDetailRow(title: 'Academic Year', value: '2021-2025'),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                ProfileDetailRow(title: 'Admission Class', value: 'X-II'),
-                ProfileDetailRow(title: 'Admission Number', value: '000126'),
+                ProfileDetailRow(title: 'Admission Class', value: 'BSCS-5M'),
+                ProfileDetailRow(
+                    title: 'Admission Number', value: 'bsf2101269'),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 ProfileDetailRow(
-                    title: 'Date of Admission', value: '1 Aug, 2020'),
-                ProfileDetailRow(title: 'Date of Birth', value: '3 May 1998'),
+                    title: 'Date of Admission', value: '9 Nov, 2021'),
+                ProfileDetailRow(title: 'Date of Birth', value: '16 May 2002'),
               ],
             ),
             sizedBox,
             ProfileDetailColumn(
               title: 'Email',
-              value: 'aisha12@gmail.com',
+              value: 'asadkambo2021@gmail.com',
             ),
             ProfileDetailColumn(
               title: 'Father Name',
-              value: 'John Mirza',
+              value: 'Muhammad Hussain',
             ),
             ProfileDetailColumn(
               title: 'Mother Name',
-              value: 'Angelica Mirza',
+              value: 'Bhisttan Bibi',
             ),
             ProfileDetailColumn(
               title: 'Phone Number',
-              value: '+923066666666',
+              value: '03028207226',
             ),
           ],
         ),
