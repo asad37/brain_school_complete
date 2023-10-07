@@ -2,6 +2,7 @@ import 'package:brain_school/components/custom_buttons.dart';
 import 'package:brain_school/constants.dart';
 import 'package:brain_school/screens/home_screen/home_screen.dart';
 import 'package:brain_school/screens/login_screen/sign_up.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
@@ -15,6 +16,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   //validate our form now
   final _formKey = GlobalKey<FormState>();
 
@@ -82,6 +85,17 @@ class _LoginScreenState extends State<LoginScreen> {
                         sizedBox,
                         DefaultButton(
                           onPress: () {
+                            var email = emailController.text.trim();
+                            var password = passwordController.text.trim();
+
+                            try {
+                              FirebaseAuth.instance
+                                  .signInWithEmailAndPassword(
+                                      email: email, password: password)
+                                  .then((value) => print("Login"));
+                            } on FirebaseAuthException catch (e) {
+                              print("${e.message}");
+                            }
                             if (_formKey.currentState!.validate()) {
                               Navigator.pushNamedAndRemoveUntil(context,
                                   HomeScreen.routeName, (route) => false);

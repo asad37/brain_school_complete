@@ -2,9 +2,11 @@ import 'package:brain_school/components/custom_buttons.dart';
 import 'package:brain_school/constants.dart';
 import 'package:brain_school/screens/home_screen/home_screen.dart';
 import 'package:brain_school/screens/login_screen/login_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+//import 'package:cloud_firestore/cloud_firestore.dart';
 
 late bool _passwordVisible;
 
@@ -16,6 +18,8 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  // double screenWidth = MediaQuery.of(context).size.width;
+  // double screenLength = MediaQuery.of(context).size.width;
   TextEditingController userController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -92,9 +96,18 @@ class _SignUpState extends State<SignUp> {
                         DefaultButton(
                           onPress: () {
                             var username = userController.text.trim();
-                            var phone = userController.text.trim();
-                            var email = userController.text.trim();
-                            var password = userController.text.trim();
+                            var phone = phoneController.text.trim();
+                            var email = emailController.text.trim();
+                            var password = passwordController.text.trim();
+                            FirebaseFirestore.instance
+                                .collection("asad")
+                                .doc("Asad")
+                                .set({
+                              'Username': username,
+                              'Phone': phone,
+                              'Email': email,
+                              'password': password
+                            });
                             try {
                               FirebaseAuth.instance
                                   .createUserWithEmailAndPassword(
